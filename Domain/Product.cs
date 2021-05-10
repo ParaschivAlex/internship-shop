@@ -14,7 +14,5 @@ namespace WebApplication1.Domain
         public virtual decimal Price { get; set; }
         public virtual decimal BasePrice { get; set; }
         public virtual int CategoryID { get; set; }
-        [ForeignKey("CategoryID")]
-        public virtual ICollection<Category> Categories { get; set; }
     }
 }

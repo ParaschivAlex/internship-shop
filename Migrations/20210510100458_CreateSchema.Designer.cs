@@ -9,8 +9,8 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    [Migration("20210510094851_AddIdentityToKeys")]
-    partial class AddIdentityToKeys
+    [Migration("20210510100458_CreateSchema")]
+    partial class CreateSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,8 @@ namespace WebApplication1.Migrations
                 {
                     b.Property<int>("CategoryID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -55,21 +56,23 @@ namespace WebApplication1.Migrations
 
                     b.HasKey("ProductID");
 
+                    b.HasIndex("CategoryID");
+
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("WebApplication1.Domain.Category", b =>
+            modelBuilder.Entity("WebApplication1.Domain.Product", b =>
                 {
-                    b.HasOne("WebApplication1.Domain.Product", null)
-                        .WithMany("Categories")
+                    b.HasOne("WebApplication1.Domain.Category", null)
+                        .WithMany("Products")
                         .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebApplication1.Domain.Product", b =>
+            modelBuilder.Entity("WebApplication1.Domain.Category", b =>
                 {
-                    b.Navigation("Categories");
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }
