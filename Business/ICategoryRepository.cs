@@ -3,7 +3,7 @@ using WebApplication1.Domain;
 
 namespace WebApplication1.Business
 {
-    interface ICategoryRepository
+    public interface ICategoryRepository
     {
         List<Category> GetCategories();
         Category Insert(Category category);

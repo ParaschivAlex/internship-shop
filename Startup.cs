@@ -31,11 +31,11 @@ namespace WebApplication1
         {
 
             services.AddControllers();
-            string connectionString = Configuration.GetConnectionString("ShopContext");
+            string connectionString = Configuration.GetConnectionString("ShopContextInternship");
             services.AddDbContext<ShopContext>(options =>
                                                options.UseSqlServer(connectionString));
 
-            services.AddSingleton<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
 
             services.AddSwaggerGen(c =>
             {

@@ -8,6 +8,7 @@ namespace WebApplication1.Domain
     public class Product
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual int ProductID { get; set; }
         public virtual string Name { get; set; }
         public virtual decimal Price { get; set; }
